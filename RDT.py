@@ -302,6 +302,55 @@ class RDT:
         # wait for acknowledgments
 
         pass
+
+        
+        '''
+        # initialize packet
+        p Packet(self.seq_numm msg_S)
+
+        # recieve while seq_num has not increased
+        while True:
+            
+            # get response from reciever
+            self.network.udt_send(p.get_byte_S())
+            response = ''
+
+            # while there is no response
+            while(response == ''):
+                # keep receiving 
+                response = self.network.udt_receive()
+
+            # get length of response (not sure how)
+            length = int(reponse[:Packet.length_S_length])
+            
+            # find byte buffer (lenght to end of packet)
+            self.byte_buffer = response[length:]
+
+            ##################### CHECK FOR CURRUPTION ######################
+
+            # Not currupt:
+            if not Packet.corrupt(response[:length])
+
+                # store bytes of packet into array
+                packet = Packet.from_byte_S(response[:length])
+
+                # check if seq_num is behind, send ACK if we must continue receiving packets
+                if packet.seq_num < self.seq_num:
+                    ack = Packet(packet.seq_num, "1")
+                    self.network.udt_send(ack.get_byte_S())
+
+                # check if response is ACK, add to seq_num
+                elif packet.msg_S == "1":
+                    self.seq_num += 1
+                    break;
+                # check if response is NAK, reset buffer if so
+                elif packet.msg_S == "0":
+                    self.byte_buffer = ''
+
+            # if packet is corrupt, empty buffer
+            if Packet.corrupt(response[:length]):
+                self.byte_buffer = ''
+        '''
         
     def rdt_2_1_receive(self):
 
