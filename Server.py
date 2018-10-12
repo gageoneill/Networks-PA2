@@ -51,14 +51,19 @@ if __name__ == '__main__':
 
         #print('Converted %s \nto \n%s\n' % (msg_S, rep_msg_S))
 
+        # TEST: Receiving ACK or NAK
+        # ================================================================================ #
         if msg_S == "1":
-            print("\t\t\tServer ACK")
+            print("\t\t\t*** Server ACK: %s ***" % (msg_S) )
         elif msg_S == "0":
-            print("\t\t\tServer NAK")
+            print("\t\t\t*** Server NAK: %s ***" % (msg_S) )
+        # ================================================================================ #
 
-        print("Server Converted: %s" % (msg_S) )
-        print("Server TO: %s" % (rep_msg_S) )
-        print("")
+        # If msg_S length > 1, essentially means do not print ACK pr NAK message
+        if len(msg_S) > 1:
+            print("Server Converted: %s" % (msg_S) )
+            print("Server TO: %s" % (rep_msg_S) )
+            print("")
 
         rdt.rdt_2_1_send(rep_msg_S)
         
