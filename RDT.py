@@ -460,6 +460,62 @@ class RDT:
 
         # ================================================================================ #
 
+        '''
+        ret_S = None
+        byte_S = self.network.udt_recieve()
+        self.byte_buffer = self.byte_buffer + byte_S
+
+        while True:
+            # check for enough bytes
+            if len(self.byte_buffer) < Packet.length_S_length:
+                # buffer not big enough to read packet length
+                break
+            
+            length = int(self.byte_buffer[:Packet.length_S_length])
+            if len(self.byte_buffer) < length:
+                # not enough buffer for whole packet
+                break
+
+            # ============================ CHECK FOR CORRUPTION ================================= # 
+            if Packet.corrupt(self.byte_buffer):
+                response = Packet(self.seq_num, "0")
+                self.network.udt_send(response.get_byte_S())
+            else:
+                # store packet
+                packet = Packet.from_byte_S(self.byte_buffer[0:length])
+
+                # check for out of sequence packet
+                if packet.seq_num < self.seq_num:
+                    response = Packet(packet, "1")
+                    self.network.udt_send(response.get_byte_S())
+
+                # ACK or NACK check
+                if (packet.msg_S == '0' or packet.msg_S == '1'):
+                    self.byte_buffer = self.byte_buffer[length:]
+                    continue
+
+                # no errors
+                elif packet.seq_num == self.seq_num:
+                    response = Packet(packet.seq_num, "1")
+                    self.network.udt_send(reponse.get_byte_S())
+                    # add 1 to seq_num
+                    self.seq_num = self.seq_num + 1
+
+                else:
+                    print("Error")
+
+                if ret_S is None:
+                    ret_S = packet.msg_S
+                else:
+                    ret_S = ret_S + packet.msg_S
+                
+            # empty buffer for next packet    
+            self.byte_buffer = self.bytebuffer[length:]
+
+        return ret_S
+
+        '''
+
         pass
     
     def rdt_3_0_send(self, msg_S):
