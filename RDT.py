@@ -35,12 +35,14 @@ class Packet:
         msg_S = byte_S[Packet.length_S_length + Packet.seq_num_S_length + Packet.checksum_length :]
 
         #[TEST]
-        print("\n=====================================")
-        print("Packet: from_byte_S(self, byte_S):")
-        print("\tseq_num: %s" % (seq_num) )
-        print("\tmsg_S: %s" % (msg_S) )
-        print("\tbyte_S: %s" % (byte_S) )
-        print("=====================================\n")
+        print("\n==================================================================================")
+        print("\tDebugging Packet")
+        print("\tPacket: from_byte_S(self, byte_S):")
+        print("\t\tPacket: # %s" % (seq_num) )
+        print("\t\tseq_num: %s" % (seq_num) )
+        print("\t\tmsg_S: %s" % (msg_S) )
+        print("\t\tbyte_S: %s" % (byte_S) )
+        print("==================================================================================\n")
 
         return self(seq_num, msg_S)
         
@@ -72,16 +74,18 @@ class Packet:
         checksum_S = checksum.hexdigest()
 
         #[TEST]
-        print("\n=====================================")
-        print("Packet: get_byte_S(self):")
-        print("\tpacket_length: %d" % (packet_length) )
-        print("\tseq_num_S: " + seq_num_S)
-        print("\tlength_S: " + length_S)
-        print("\tchecksum_S: " + checksum_S)
-        print("\tmsg_S: " + self.msg_S)
-        print("\treturn string or packet: %s" % (length_S + seq_num_S + checksum_S + self.msg_S) )
-        print("\tFinal packet Len: %d" % (  len(length_S + seq_num_S + checksum_S + self.msg_S) ) )
-        print("=====================================\n")
+        print("\n==================================================================================")
+        print("\tDebugging Packet")
+        print("\tPacket: get_byte_S(self):")
+        print("\t\tPacket: # %d" % (self.seq_num) )
+        print("\t\tpacket_length: %d" % (packet_length) )
+        print("\t\tseq_num_S: " + seq_num_S)
+        print("\t\tlength_S: " + length_S)
+        print("\t\tchecksum_S: " + checksum_S)
+        print("\t\tmsg_S: " + self.msg_S)
+        print("\t\treturn string or packet: %s" % (length_S + seq_num_S + checksum_S + self.msg_S) )
+        print("\t\tFinal packet Len: %d" % (  len(length_S + seq_num_S + checksum_S + self.msg_S) ) )
+        print("==================================================================================\n")
 
         #compile into a string
         return length_S + seq_num_S + checksum_S + self.msg_S
@@ -126,16 +130,18 @@ class Packet:
         computed_checksum_S = checksum.hexdigest()
 
         #[TEST]
-        print("\n=====================================")
-        print("Packet: corrupt(byte_S):")
-        print("\tlength_S: " + length_S)
-        print("\tseq_num_S: " + seq_num_S)
-        print("\tchecksum_S: " + checksum_S)
-        print("\tmsg_S: " + msg_S)
-        print("\tchecksum_length: %d" % (Packet.checksum_length) )
-        print("\tcomputed_checksum_S: " + computed_checksum_S)
-        print("\tFinal packet Len: %d" % (len( length_S + seq_num_S + checksum_S + msg_S )) )
-        print("=====================================\n")
+        print("\n==================================================================================")
+        print("\tDebugging Packet")
+        print("\tPacket: corrupt(byte_S):")
+        print("\t\tPacket: # %d" % ( int(seq_num_S) ) )
+        print("\t\tlength_S: " + length_S)
+        print("\t\tseq_num_S: " + seq_num_S)
+        print("\t\tchecksum_S: " + checksum_S)
+        print("\t\tmsg_S: " + msg_S)
+        print("\t\tchecksum_length: %d" % (Packet.checksum_length) )
+        print("\t\tcomputed_checksum_S: " + computed_checksum_S)
+        print("\t\tFinal packet Len: %d" % (len( length_S + seq_num_S + checksum_S + msg_S )) )
+        print("==================================================================================\n")
 
         #and check if the same
         return checksum_S != computed_checksum_S
@@ -160,15 +166,17 @@ class Packet:
         length_S = str(packet_length).zfill(self.length_S_length)
         
         #[TEST]
-        print("\n=====================================")
-        print("Packet: ACK:")
-        print("\tseq_num_S: " + seq_num_S)
-        print("\tpacket_length: %d" % (packet_length) )
-        print("\tlength_S: " + length_S)
-        print("\tack_mess: " + ack_mess)
-        print("\tPackeg final string: %s" % (length_S + seq_num_S + ack_mess) )
-        print("\tFinal packet Len: %d" % (len( length_S + seq_num_S + ack_mess )) )
-        print("=====================================\n")
+        print("\n==================================================================================")
+        print("\tDebugging Packet")
+        print("\t\tPacket: # %s" % (seq_num) )
+        print("\tPacket: ACK:")
+        print("\t\tseq_num_S: " + seq_num_S)
+        print("\t\tpacket_length: %d" % (packet_length) )
+        print("\t\tlength_S: " + length_S)
+        print("\t\tack_mess: " + ack_mess)
+        print("\t\tPackeg final string: %s" % (length_S + seq_num_S + ack_mess) )
+        print("\t\tFinal packet Len: %d" % (len( length_S + seq_num_S + ack_mess )) )
+        print("==================================================================================\n")
 
         #compile into a string
         return length_S + seq_num_S + ack_mess
@@ -193,15 +201,17 @@ class Packet:
         length_S = str(packet_length).zfill(self.length_S_length)
         
         #[TEST]
-        print("\n=====================================")
-        print("Packet: NAK:")
-        print("\tseq_num_S: " + seq_num_S)
-        print("\tpacket_length: %d" % (packet_length) )
-        print("\tlength_S: " + length_S)
-        print("\tnak_mess: " + nak_mess)
-        print("\tPackeg final string: %s" % (length_S + seq_num_S + nak_mess) )
-        print("\tFinal packet Len: %d" % (len( length_S + seq_num_S + nak_mess )) )
-        print("=====================================\n")
+        print("\n==================================================================================")
+        print("\tDebugging Packet")
+        print("\tPacket: NAK:")
+        print("\t\tPacket: # %s" % (seq_num) )
+        print("\t\tseq_num_S: " + seq_num_S)
+        print("\t\tpacket_length: %d" % (packet_length) )
+        print("\t\tlength_S: " + length_S)
+        print("\t\tnak_mess: " + nak_mess)
+        print("\t\tPackeg final string: %s" % (length_S + seq_num_S + nak_mess) )
+        print("\t\tFinal packet Len: %d" % (len( length_S + seq_num_S + nak_mess )) )
+        print("==================================================================================\n")
 
         #compile into a string
         return length_S + seq_num_S + nak_mess
@@ -225,85 +235,7 @@ class RDT:
 
     def rdt_2_1_send(self, msg_S):
 
-        # [INFO]
         # =========================================================================================================== #
-        # INFO source: https://astro.temple.edu/~stafford/cis320f05/lecture/chap3/deluxe-content.html
-        # =========================================================================================================== #
-
-        # FROM DIAGRAM RDT 2.1 sender
-        # =========================================================================================================== #
-        # Wait for call from API
-        # build packet
-        # send packet
-        # Wait for ACK or NAK
-        # Receive packet and check if it is corrupted or NAK: resend packet
-        # Receive packet and check if it is corrupted or ACK: Wait for call from API
-        # Repeat process
-        # =========================================================================================================== #
-
-        if msg_S == "1":
-            print("\t\t\trdt_2_1_send: ACK")
-        elif msg_S == "0":
-            print("\t\t\trdt_2_1_send: NAK")
-
-        if self.seq_num == 1: # very first call
-            # Build and send packet
-            p = Packet(self.seq_num, msg_S)
-            self.previous_pkt = p
-            self.seq_num += 1
-            self.network.udt_send(p.get_byte_S())
-        elif msg_S == "1":
-            # Build and send packet
-            p = Packet(self.seq_num, msg_S)
-            self.previous_pkt = p
-            self.seq_num += 1
-            self.network.udt_send(p.get_byte_S())
-        elif msg_S == "0":
-            # Build and send packet
-            p = self.previous_pkt
-            #p = Packet(self.seq_num, msg_S)
-            #self.seq_num += 1
-            self.network.udt_send(p.get_byte_S())
-
-
-        """
-        if (self.seq_num == 1) and (ack_nak == 0) and (self.previous_pkt is None):
-            # first call from application layer
-
-            # Build and send packet
-            p = Packet(self.seq_num, msg_S)
-            self.previous_pkt = p
-            self.seq_num += 1
-            self.network.udt_send(p.get_byte_S())
-
-            print("\t***First call from API***")
-        if (self.seq_num > 1) and (ack_nak == 1) or (self.previous_pkt is not None):
-            # Nth call from application layer
-            # if ACK then send another packet
-
-            # Build and send packet
-            p = Packet(self.seq_num, msg_S)
-            self.previous_pkt = p
-            self.seq_num += 1
-            self.network.udt_send(p.get_byte_S())
-
-            print("\t***Call from API with ACK***")
-        if (self.seq_num > 1) and (ack_nak == 0) or (self.previous_pkt is not None):
-            # Nth call from application layer
-            # if NAK then send another packet
-            
-            # send previous packet
-            p = self.previous_pkt
-            self.previous_pkt = p
-            self.network.udt_send(p.get_byte_S())
-
-            print("\t***Call from API with NAC***")
-        """
-        # wait for acknowledgments
-
-        pass
-
-        
         '''
         # initialize packet
         p Packet(self.seq_numm msg_S)
@@ -351,6 +283,75 @@ class RDT:
             if Packet.corrupt(response[:length]):
                 self.byte_buffer = ''
         '''
+        # =========================================================================================================== #
+
+
+
+        # [INFO]
+        # =========================================================================================================== #
+        # INFO source: https://astro.temple.edu/~stafford/cis320f05/lecture/chap3/deluxe-content.html
+        # =========================================================================================================== #
+
+        # FROM DIAGRAM RDT 2.1 sender
+        # =========================================================================================================== #
+        # Wait for call from API
+        # build packet
+        # send packet
+        # Wait for ACK or NAK
+        # Receive packet and check if it is corrupted or NAK: resend packet
+        # Receive packet and check if it is corrupted or ACK: Wait for call from API
+        # Repeat process
+        # =========================================================================================================== #
+
+        # TEST: Receiving ACK or NAK from the Server or Client
+        # =========================================================================================================== #
+        if msg_S == "1":
+            print("\n==================================================================================")
+            print("Debugging RDT 2.1 SEND")
+            print("Packet: # %d" % (self.seq_num) )
+            print("Got ACK message: %s" % (msg_S) )
+            print("==================================================================================\n")
+        elif msg_S == "0":
+            print("\n==================================================================================")
+            print("Debugging RDT 2.1 SEND")
+            print("Packet: # %d" % (self.seq_num) )
+            print("Got NAK message: %s" % (msg_S) )
+            print("==================================================================================\n")
+        # =========================================================================================================== #
+
+        # DEMO
+        # =========================================================================================================== #
+        # very first call
+        if self.seq_num == 1:
+
+            # Build and send packet
+            p = Packet(self.seq_num, msg_S)
+
+            # Save previously sent packet
+            self.previous_pkt = p
+
+            self.seq_num += 1
+            self.network.udt_send(p.get_byte_S())
+
+        elif msg_S == "1":
+
+            # Build and send packet
+            p = Packet(self.seq_num, msg_S)
+
+            # Save previously sent packet
+            self.previous_pkt = p
+
+            self.seq_num += 1
+            self.network.udt_send(p.get_byte_S())
+
+        elif msg_S == "0":
+
+            # Retrieve previous packet and send packet
+            p = self.previous_pkt
+            self.network.udt_send(p.get_byte_S())
+        # =========================================================================================================== #
+
+        pass
         
     def rdt_2_1_receive(self):
 
@@ -423,12 +424,24 @@ class RDT:
                         # TEST
                         self.rdt_2_1_send("1")
 
+                        print("\n==================================================================================")
+                        print("Debugging RDT 2.1 RECEIVE")
+                        print("Packet: # %d" % (self.seq_num) )
+                        print("ACK message sent")
+                        print("==================================================================================\n")
+
                     elif isCorrupted == True:
 
                         # TEST
                         # send NAK to the sender
                         # sender should resend packet
                         self.rdt_2_1_send("0")
+
+                        print("\n==================================================================================")
+                        print("Debugging RDT 2.1 RECEIVE")
+                        print("Packet: # %d" % (self.seq_num) )
+                        print("NAK message sent")
+                        print("==================================================================================\n")
 
                         #remove the packet bytes from the buffer
                         self.byte_buffer = self.byte_buffer[length:]
