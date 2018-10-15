@@ -519,7 +519,7 @@ class RDT:
         pass
     
     def rdt_3_0_send(self, msg_S):
-        pass
+        
         
     def rdt_3_0_receive(self):
         pass
